@@ -72,7 +72,7 @@ function CityPicker() {
             className="text-black"
             value={selectedCity}
             onChange={handleSelectedCity}
-            options={City.getCitiesOfCountry(
+            options={City?.getCitiesOfCountry(
               selectedCountry.value.isoCode
             )?.map((city) => ({
               value: {
