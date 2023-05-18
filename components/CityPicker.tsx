@@ -52,7 +52,6 @@ function CityPicker() {
       `/location/${option?.value.name}/${option?.value.latitude}/${option?.value.longitude}`
     )
   }
-
   return (
     <div className="space-y-4">
       <div className="space-y-2">
@@ -96,5 +95,4 @@ function CityPicker() {
     </div>
   )
 }
-
 export default CityPicker
