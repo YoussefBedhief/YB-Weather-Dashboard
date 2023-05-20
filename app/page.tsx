@@ -9,7 +9,7 @@ export default function Home() {
           YB Weather App
         </Text>
         <Subtitle className="text-xl text-center ">
-          Developed with Nextjs 13, tailwindCSS, tremor2.0 and + More!
+          Developed with Nextjs 13, tailwindCSS, GraphQL,tremor2.0 and + More!
         </Subtitle>
         <Divider className="my-10" />
         <Card className="bg-gradient-to-r from-blue-700 via-blue-800 to-gray-900">
