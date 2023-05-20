@@ -4,7 +4,8 @@ import { Country, City } from "country-state-city"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 import Select from "react-select"
-import { GlobeIcon } from "@heroicons/react/solid"
+import { GlobeIcon, LocationMarkerIcon } from "@heroicons/react/solid"
+import { locatedError } from "graphql"
 
 type option = {
   value: {
@@ -52,8 +53,32 @@ function CityPicker() {
       `/location/${option?.value.name}/${option?.value.latitude}/${option?.value.longitude}`
     )
   }
+
+  const handleGeoLocation = async () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(async function (position) {
+        const lat = position.coords.latitude
+        const long = position.coords.longitude
+        const res =
+          await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${long}&localityLanguage=en
+        `)
+        const data = await res.json()
+        router.push(`/location/${data?.city}/${lat}/${long}`)
+      })
+    } else {
+      alert("Geolocation is not supported by this browser")
+    }
+  }
+
   return (
     <div className="space-y-4">
+      <button
+        className="flex justify-center items-center outline-none bg-white text-blue-800 p-5 rounded-xl"
+        onClick={handleGeoLocation}
+      >
+        <LocationMarkerIcon className="w-6 h-6 text-blue-800" />
+        Current Location
+      </button>
       <div className="space-y-2">
         <div className="flex items-center space-x-2 text-white/80">
           <GlobeIcon className="h-5 w-5 text-white" />
